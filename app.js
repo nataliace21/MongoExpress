@@ -13,16 +13,16 @@ app.use(cors());
 
 //conexion a mongo
 
-mongoose.connect('mongodb://localhost:27017/miapp'),({
+mongoose.connect('mongodb://localhost:27017/miapp',{
     useNewUrlParser:true,
-    useUnifiedTopologt:true,
+    useUnifiedTopology:true,
 })
 .then(()=>console.log("MongoDB Conectado"))
 .catch(err=>console.err(err))
 
 //Rutas
 
-app.use('api/items',itemsRoutes);
+app.use('api/items',itemRoutes);
 
 app.listen(PORT,()=>{
     console.log(`Servidor conectado en http://localhost:${PORT}`);

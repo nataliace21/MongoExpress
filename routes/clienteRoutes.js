@@ -1,14 +1,14 @@
 const express=require('express');
 const router=express.Router();
-const Item=require('../models/Producto');
+const Cliente=require('../models/Cliente');
 
 
 //Registrar un producto
 router.post('/',async(req,res)=>{
     try{
-        const item=new Item(req.body);
-        await item.save();
-        res.status(201).json(item);
+        const cliente=new Cliente(req.body);
+        await cliente.save();
+        res.status(201).json(cliente);
 
     }catch(error){
         res.status(400).json({ error: error.menssage});
@@ -18,8 +18,8 @@ router.post('/',async(req,res)=>{
 //consultar todos los productos
 router.get('/',async(req,res)=>{
     try{
-        const items=await Item.find();
-        res.json(items);
+        const cliente=await Cliente.find();
+        res.json(cliente);
 
     }catch(error){
         res.status(500).json({ error: error.menssage});
@@ -29,9 +29,9 @@ router.get('/',async(req,res)=>{
 //consultar prodcuto por id
 router.get('/:id',async(req,res)=>{
     try{
-        const items=await Item.findById(req.params.id);
-        if (!item)return res.status(404).json({error: 'Producto no encontrado'});
-        res.json(item);
+        const cliente=await Cliente.findById(req.params.id);
+        if (!cliente)return res.status(404).json({error: 'Producto no encontrado'});
+        res.json(cliente);
 
     }catch(error){
         res.status(500).json({ error: error.menssage});
@@ -40,9 +40,9 @@ router.get('/:id',async(req,res)=>{
 //modificar datos del producto 
 router.put('/:id',async(req,res)=>{
     try{
-        const item=await Item.findByIdAndUpdate(req.params.id, req.body,{new:true});
-        if (!item)return res.status(404).json({error: 'Producto no encontrado'});
-        res.json(item);
+        const cliente=await Cliente.findByIdAndUpdate(req.params.id, req.body,{new:true});
+        if (!cliente)return res.status(404).json({error: 'Producto no encontrado'});
+        res.json(cliente);
 
     }catch(error){
         res.status(500).json({ error: error.menssage});
@@ -52,9 +52,9 @@ router.put('/:id',async(req,res)=>{
 
 router.delete('/:id',async(req,res)=>{
     try{
-        const items=await Item.findByIdAndUpdate(req.params.id);
-        if (!item)return res.status(404).json({error: 'Producto no encontrado'});
-        res.json(items);
+        const cliente=await Cliente.findByIdAndDelete(req.params.id);
+        if (!cliente)return res.status(404).json({error: 'Producto no encontrado'});
+        res.json(cliente);
     
     }catch(error){
         res.status(500).json({ error: error.menssage})
